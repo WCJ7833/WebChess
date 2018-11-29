@@ -65,31 +65,15 @@ public class Row implements Iterable<Space>{
                     }
                     else if (i == 3){
                         // Black (Red) Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
-                        // Black (Red) King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
                     else {
-                        // Black (Red) Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
                         // Black (Red) King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
                     spaces[i] = emptySpace;
                 }
@@ -108,6 +92,7 @@ public class Row implements Iterable<Space>{
                 }
             }
             else if (idx == 0) {
+
                 for (int i = 0; i < 8; i++) {
                     Space emptySpace = new Space(i, idx);
                     //Rook Creation
@@ -129,32 +114,16 @@ public class Row implements Iterable<Space>{
                         emptySpace.setPiece(newPiece);
                     }
                     else if (i == 3){
-                        // White Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
                         // White King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
                     else {
                         // White Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
-                        // White King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
                     spaces[i] = emptySpace;
                 }
@@ -199,33 +168,17 @@ public class Row implements Iterable<Space>{
                         player.addPiece(newPiece);
                         emptySpace.setPiece(newPiece);
                     }
+                    // White Queen
                     else if (i == 3){
-                        // Black (Red) Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
-                        // Black (Red) King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
-                    else {
-                        // Black (Red) Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
-                        // Black (Red) King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                    // White King
+                    else{
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
                     spaces[i] = emptySpace;
                 }
@@ -265,32 +218,18 @@ public class Row implements Iterable<Space>{
                         emptySpace.setPiece(newPiece);
                     }
                     else if (i == 3){
-                        // White Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
-                        // White King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                        // RED King
+
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+
                     }
                     else {
-                        // White Queen
-                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
-                        // White King
-                        else{
-                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
-                            player.addPiece(newPiece);
-                            emptySpace.setPiece(newPiece);
-                        }
+                        // RED Queen
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
                     spaces[i] = emptySpace;
                 }
