@@ -73,7 +73,7 @@ public class BoardView implements Iterable<Row>{
         }
         rows = new Row[8];
         for (int i = 0; i < 8; i++) {
-            rows[i] = new Row(i,isRed, player, opponent, this,opponent.getBoard());
+            rows[i] = new Row(i,isRed, player, this);
         }
         this.rules=new Rules(this);
         this.forceJump = false;

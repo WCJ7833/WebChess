@@ -9,12 +9,12 @@ public class Piece {
     /**
      * This is an enum representing what kind of piece it is (ie, single or king)
      */
-    public enum TYPE {SINGLE, KING}
+    public enum TYPE {SINGLE, KING, PAWN, ROOK, KNIGHT, BISHOP, QUEEN}
 
     /**
      * This is an enum representing what color the piece is
      */
-    public enum COLOR {RED, WHITE}
+    public enum COLOR {RED, WHITE, BLACK}
 
     /**
      * This is the COLOR of this piece

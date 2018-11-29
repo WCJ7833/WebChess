@@ -25,29 +25,138 @@ public class Row implements Iterable<Space>{
      *                  false
      * @return a Row object that is set up for the start of a game
      */
-    public Row(int idx, boolean isRed, Player player, Player opponent, BoardView board, BoardView eboard){
+    public Row(int idx, boolean isRed, Player player,BoardView board){
         index=idx;
         spaces=new Space[8];
         if(isRed) {
-            if (idx == 7 || idx == 6 || idx == 5) {
+            // Red or Black Player
+            if (idx == 6) {
+                //Pawn Creation
                 for (int i = 0; i < 8; i++) {
-                    Space newBoi = new Space(i, idx);
-                    if (newBoi.isValid()) {
-                        Piece lolo=new Piece(Piece.COLOR.RED, Piece.TYPE.SINGLE, idx, i, player,board);
-                        player.addPiece(lolo);
-                        newBoi.setPiece(lolo);
+                    Space emptySpace = new Space(i, idx);
+                    if (emptySpace.isValid()) {
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.PAWN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
-                    spaces[i] = newBoi;
+                    spaces[i] = emptySpace;
                 }
-            } else if (idx == 0 || idx == 1 || idx == 2) {
+            }
+            else if (idx == 7){
                 for (int i = 0; i < 8; i++) {
-                    Space newBoi = new Space(i, idx);
-                    if (newBoi.isValid()) {
-                        Piece lolo=new Piece(Piece.COLOR.WHITE, Piece.TYPE.SINGLE, idx, i, opponent,eboard);
-                        opponent.addPiece(lolo);
-                        newBoi.setPiece(lolo);
+                    Space emptySpace = new Space(i, idx);
+                    //Rook Creation
+                    if ( i == 0 || i == 7){
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.ROOK, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
-                    spaces[i] = newBoi;
+                    //Knight Creation
+                    else if (i == 1 || i == 6){
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KNIGHT, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    //Bishop Creation
+                    else if (i == 2 || i == 5){
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.BISHOP, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    else if (i == 3){
+                        // Black (Red) Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // Black (Red) King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    else {
+                        // Black (Red) Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // Black (Red) King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    spaces[i] = emptySpace;
+                }
+            }
+            // White Player Opponent
+            else if (idx == 1) {
+                //Pawn Creation
+                for (int i = 0; i < 8; i++) {
+                    Space emptySpace = new Space(i, idx);
+                    if (emptySpace.isValid()) {
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.PAWN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    spaces[i] = emptySpace;
+                }
+            }
+            else if (idx == 0) {
+                for (int i = 0; i < 8; i++) {
+                    Space emptySpace = new Space(i, idx);
+                    //Rook Creation
+                    if ( i == 0 || i == 7){
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.ROOK, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    //Knight Creation
+                    else if (i == 1 || i == 6){
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KNIGHT, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    //Bishop Creation
+                    else if (i == 2 || i == 5){
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.BISHOP, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    else if (i == 3){
+                        // White Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // White King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    else {
+                        // White Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // White King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    spaces[i] = emptySpace;
                 }
             } else {
                 for (int i = 0; i < 8; i++) {
@@ -56,25 +165,134 @@ public class Row implements Iterable<Space>{
             }
         }
         else{
-            if (idx == 0 || idx == 1 || idx == 2) {
+            // White Player
+            if (idx == 6) {
+                //Pawn Creation
                 for (int i = 0; i < 8; i++) {
-                    Space newBoi = new Space(i, idx);
-                    if (newBoi.isValid()) {
-                        Piece lolo=new Piece(Piece.COLOR.RED, Piece.TYPE.SINGLE, idx, i, opponent,eboard);
-                        opponent.addPiece(lolo);
-                        newBoi.setPiece(lolo);
+                    Space emptySpace = new Space(i, idx);
+                    if (emptySpace.isValid()) {
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.PAWN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
-                    spaces[i] = newBoi;
+                    spaces[i] = emptySpace;
                 }
-            } else if (idx == 7 || idx == 6 || idx == 5) {
+            }
+            else if (idx == 7){
                 for (int i = 0; i < 8; i++) {
-                    Space newBoi = new Space(i, idx);
-                    if (newBoi.isValid()) {
-                        Piece lolo=new Piece(Piece.COLOR.WHITE, Piece.TYPE.SINGLE, idx, i, player,board);
-                        player.addPiece(lolo);
-                        newBoi.setPiece(lolo);
+                    Space emptySpace = new Space(i, idx);
+                    //Rook Creation
+                    if ( i == 0 || i == 7){
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.ROOK, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
                     }
-                    spaces[i] = newBoi;
+                    //Knight Creation
+                    else if (i == 1 || i == 6){
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KNIGHT, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    //Bishop Creation
+                    else if (i == 2 || i == 5){
+                        Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.BISHOP, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    else if (i == 3){
+                        // Black (Red) Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // Black (Red) King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    else {
+                        // Black (Red) Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.WHITE){
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // Black (Red) King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.WHITE, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    spaces[i] = emptySpace;
+                }
+            }
+            // Red  Opponent
+            else if (idx == 1) {
+                //Pawn Creation
+                for (int i = 0; i < 8; i++) {
+                    Space emptySpace = new Space(i, idx);
+                    if (emptySpace.isValid()) {
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.PAWN, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    spaces[i] = emptySpace;
+                }
+            }
+            else if (idx == 0) {
+                for (int i = 0; i < 8; i++) {
+                    Space emptySpace = new Space(i, idx);
+                    //Rook Creation
+                    if ( i == 0 || i == 7){
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.ROOK, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    //Knight Creation
+                    else if (i == 1 || i == 6){
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KNIGHT, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    //Bishop Creation
+                    else if (i == 2 || i == 5){
+                        Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.BISHOP, idx, i, player, board);
+                        player.addPiece(newPiece);
+                        emptySpace.setPiece(newPiece);
+                    }
+                    else if (i == 3){
+                        // White Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // White King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    else {
+                        // White Queen
+                        if (emptySpace.getColor() == Space.SPACECOLOR.BLACK){
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.QUEEN, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                        // White King
+                        else{
+                            Piece newPiece = new Piece(Piece.COLOR.RED, Piece.TYPE.KING, idx, i, player, board);
+                            player.addPiece(newPiece);
+                            emptySpace.setPiece(newPiece);
+                        }
+                    }
+                    spaces[i] = emptySpace;
                 }
             } else {
                 for (int i = 0; i < 8; i++) {
