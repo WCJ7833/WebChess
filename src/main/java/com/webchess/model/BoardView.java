@@ -131,7 +131,7 @@ public class BoardView implements Iterable<Row>{
 
     /**
      * This is an override of iterator, implemented because BoardView implements iterable.
-     * @return an Iterator that gets Row objects from BardView's rows data member
+     * @return an Iterator that gets Row objects from BoardView's rows data member
      */
     @Override
     public Iterator<Row> iterator() {

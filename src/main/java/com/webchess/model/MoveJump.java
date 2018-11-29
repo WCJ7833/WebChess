@@ -3,7 +3,7 @@ package com.webchess.model;
 /**
  * This class is used to model a jump move by the user, in which the user uses one of their pieces
  * to jump over an opponent's
- * @extends Move
+ *
  * @author bjs2864@rit.edu
  */
 public class MoveJump extends Move{

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This is an AI player
  * @author Brunon Sztuba bjs2864@rit.edu
- * @atuhor Will Johnson wcj7833@rit.edu
+ * @author Will Johnson wcj7833@rit.edu
  */
 public class AI extends Player {
 
