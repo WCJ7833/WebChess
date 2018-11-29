@@ -1,0 +1,11 @@
+1. Open command prompt
+2. Move to the directory where the project files are located
+3. Run the following command in the command line 'mvn compile exec: java'
+4. Open a web browser
+5. Go to the url 'localhost:4567'
+6. Repeat step 4 - 5 in the incognito or secret version of your current browser
+7. To sign into the game, click the sign in link on the task bar
+8. Your username must be alphanumeric and can include spaces
+9. You cannot sign in as a username that is currently in use
+10. Both browsers must be signed in to have the ability to start a game
+11. You now have free rein to test the functionality of the game
