@@ -232,6 +232,6 @@ public class Piece {
      */
     @Override
     public String toString() {
-        return this.getColor() + " R:" + this.getRow() + " C:" + this.getCol();
+        return this.getOwner().toString() + "| " + this.getType() + "| " + this.getColor() + " R:" + this.getRow() + " C:" + this.getCol();
     }
 }

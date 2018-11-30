@@ -80,98 +80,10 @@ public class Rules {
             return returns;
         }
         else if(mover.getType().equals(Piece.TYPE.PAWN)) {
-            if (mover.isFirstMove()){
-                int distanceTraveled = into.getRow() - mover.getRow();
-                if (distanceTraveled == 2){
-                    int columnChange = into.getCellIdx() - mover.getCol();
-                    if (columnChange == 0){
-                        Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
-                        if (spaceBetween.isValid()){
-                            mover.setFirstMove(false);
-                            ArrayList<Object> returns=new ArrayList<>();
-                            returns.add(true);
-                            returns.add("");
-                            return returns;
-                        }
-                        else{
-                            ArrayList<Object> returns=new ArrayList<>();
-                            returns.add(false);
-                            returns.add("There is a piece between your start and end spaces");
-                            return returns;
-                        }
-                    }
-                    else {
-                        ArrayList<Object> returns=new ArrayList<>();
-                        returns.add(false);
-                        returns.add("Your regular pawn move can't have a column change");
-                        return returns;
-                    }
-                }
-                else if (distanceTraveled == 1){
-                    int columnChange = into.getCellIdx() - mover.getCol();
-                    if (columnChange == 0){
-                        Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
-                        if (spaceBetween.isValid()){
-                            mover.setFirstMove(false);
-                            ArrayList<Object> returns=new ArrayList<>();
-                            returns.add(true);
-                            returns.add("");
-                            return returns;
-                        }
-                        else{
-                            ArrayList<Object> returns=new ArrayList<>();
-                            returns.add(false);
-                            returns.add("There is a piece in front of your pawn");
-                            return returns;
-                        }
-                    }
-                    else {
-                        ArrayList<Object> returns=new ArrayList<>();
-                        returns.add(false);
-                        returns.add("Your regular pawn move can't have a column change");
-                        return returns;
-                    }
-                }
-                else{
-                    ArrayList<Object> returns=new ArrayList<>();
-                    returns.add(false);
-                    returns.add("Your first pawn move can only go forward 1 or 2 spaces");
-                    return returns;
-                }
-            }
-            else{
-                int distanceTraveled = into.getRow() - mover.getRow();
-                if (distanceTraveled == 1){
-                    int columnChange = into.getCellIdx() - mover.getCol();
-                    if (columnChange == 0){
-                        Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
-                        if (spaceBetween.isValid()){
-                            ArrayList<Object> returns=new ArrayList<>();
-                            returns.add(true);
-                            returns.add("");
-                            return returns;
-                        }
-                        else{
-                            ArrayList<Object> returns=new ArrayList<>();
-                            returns.add(false);
-                            returns.add("There is a piece in front of your pawn");
-                            return returns;
-                        }
-                    }
-                    else {
-                        ArrayList<Object> returns=new ArrayList<>();
-                        returns.add(false);
-                        returns.add("Your regular pawn move can't have a column change");
-                        return returns;
-                    }
-                }
-                else{
-                    ArrayList<Object> returns=new ArrayList<>();
-                    returns.add(false);
-                    returns.add("Your first pawn move can only go forward 1 or 2 spaces");
-                    return returns;
-                }
-            }
+            ArrayList<Object> returnMessage = regularPawnMove(mover,into);
+            System.out.println(returnMessage.get(0));
+            return returnMessage;
+
         }
         else if(mover.getType().equals(Piece.TYPE.KING)) {
 
@@ -240,6 +152,103 @@ public class Rules {
                         "squares diagonal, in front, and adjacent.");
                 return objects;
 
+        }
+    }
+
+    public ArrayList<Object> regularPawnMove(Piece mover, Space into){
+        System.out.println(mover);
+        System.out.println(into.toString());
+        if (mover.isFirstMove()){
+            int distanceTraveled = into.getRow() - mover.getRow();
+            if (distanceTraveled == 2){
+                int columnChange = into.getCellIdx() - mover.getCol();
+                if (columnChange == 0){
+                    Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
+                    if (spaceBetween.isValid()){
+                        mover.setFirstMove(false);
+                        ArrayList<Object> returns=new ArrayList<>();
+                        returns.add(true);
+                        returns.add("");
+                        return returns;
+                    }
+                    else{
+                        ArrayList<Object> returns=new ArrayList<>();
+                        returns.add(false);
+                        returns.add("There is a piece between your start and end spaces");
+                        return returns;
+                    }
+                }
+                else {
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(false);
+                    returns.add("Your regular pawn move can't have a column change");
+                    return returns;
+                }
+            }
+            else if (distanceTraveled == 1){
+                int columnChange = into.getCellIdx() - mover.getCol();
+                if (columnChange == 0){
+                    Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
+                    if (spaceBetween.isValid()){
+                        mover.setFirstMove(false);
+                        ArrayList<Object> returns=new ArrayList<>();
+                        returns.add(true);
+                        returns.add("");
+                        return returns;
+                    }
+                    else{
+                        ArrayList<Object> returns=new ArrayList<>();
+                        returns.add(false);
+                        returns.add("There is a piece in front of your pawn");
+                        return returns;
+                    }
+                }
+                else {
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(false);
+                    returns.add("Your regular pawn move can't have a column change");
+                    return returns;
+                }
+            }
+            else{
+                ArrayList<Object> returns=new ArrayList<>();
+                returns.add(false);
+                returns.add("Your first pawn move can only go forward 1 or 2 spaces");
+                return returns;
+            }
+        }
+        else{
+            int distanceTraveled = into.getRow() - mover.getRow();
+            if (distanceTraveled == 1){
+                int columnChange = into.getCellIdx() - mover.getCol();
+                if (columnChange == 0){
+                    Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
+                    if (spaceBetween.isValid()){
+                        ArrayList<Object> returns=new ArrayList<>();
+                        returns.add(true);
+                        returns.add("");
+                        return returns;
+                    }
+                    else{
+                        ArrayList<Object> returns=new ArrayList<>();
+                        returns.add(false);
+                        returns.add("There is a piece in front of your pawn");
+                        return returns;
+                    }
+                }
+                else {
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(false);
+                    returns.add("Your regular pawn move can't have a column change");
+                    return returns;
+                }
+            }
+            else{
+                ArrayList<Object> returns=new ArrayList<>();
+                returns.add(false);
+                returns.add("Your pawn move can only go forward 1 space");
+                return returns;
+            }
         }
     }
 

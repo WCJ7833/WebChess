@@ -137,6 +137,11 @@ public class Space {
         }
     }
 
+    @Override
+    public String toString() {
+        return "R:" + this.getRow() + " C: " + this.getCellIdx() + " P:" + this.getPiece();
+    }
+
     /**
      * This is a color getter used for testing purposes
      * @return color

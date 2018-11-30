@@ -256,4 +256,9 @@ public class Player {
     public boolean isValid(Move move){
         return board.allowed(move);
     }
+
+    @Override
+    public String toString() {
+        return this.username;
+    }
 }
