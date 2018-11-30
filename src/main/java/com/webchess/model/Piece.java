@@ -14,7 +14,7 @@ public class Piece {
     /**
      * This is an enum representing what color the piece is
      */
-    public enum COLOR {RED, WHITE, BLACK}
+    public enum COLOR {WHITE, RED}
 
     /**
      * This is the COLOR of this piece
@@ -42,10 +42,9 @@ public class Piece {
     private Player owner;
 
     /**
-     * foreJump is a boolean that represents whether or not the piece is the
-     * one being used in a current multijump
+     *
      */
-    private boolean forceJump;
+    private boolean firstMove;
 
     /**
      * reverseJump is a boolean that represents whether or not the piece is
@@ -79,7 +78,7 @@ public class Piece {
         this.row=row;
         this.col=col;
         this.owner=owner;
-        this.forceJump = false;
+        this.firstMove = true;
         this.reverseJump = false;
         board=view;
     }
@@ -179,13 +178,6 @@ public class Piece {
     }
 
     /**
-     * This is a setter for forceJump
-     */
-    public void setForceJump(boolean force) {
-        forceJump = force;
-    }
-
-    /**
      * This method is a getter for reverseJump
      * @return reverseJump
      */
@@ -224,6 +216,14 @@ public class Piece {
      */
     public boolean sameBoard(BoardView other){
         return this.board.equals(other);
+    }
+
+    public boolean isFirstMove() {
+        return firstMove;
+    }
+
+    public void setFirstMove(boolean firstMove) {
+        this.firstMove = firstMove;
     }
 
     /**

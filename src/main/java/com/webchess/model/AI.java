@@ -42,15 +42,10 @@ public class AI extends Player {
             return;
         }
         made=null;
-        super.setJumps();
         boolean jumped=this.goJump();
         if(!jumped){
             this.goStandard();
             return;
-        }
-        Piece multi=super.getForced();
-        if(multi!=null) {
-            doJump(multi);
         }
     }
 
@@ -61,28 +56,16 @@ public class AI extends Player {
         Piece pie = null;
         List<Piece>pieces=super.getPieces();
         for (Piece p : pieces) {
-            if (super.canJump(p)&&p.sameBoard(this.getBoard())) {//error?
-                pie = p;
-                break;
-            }
+            pie = p;
+            break;
+
         }
         if(pie==null) {
             return false;
         }
         while(super.isTurn()&&!super.isLost()){
             doJump(pie);
-            if(this.getBoard().jumpy(pie)){
-                super.getBoard().getRules().setForceJump(pie);
-            }
-            else{
-                super.getBoard().getRules().clearForce();
-            }
-            if(this.lost()){
-                super.setLost(true);
-            }
-            if(super.getBoard().getRules().getForcedJumper()==null){
-                super.getBoard().toggleisTurn();
-            }
+
         }
         return true;
     }
@@ -129,7 +112,7 @@ public class AI extends Player {
             }
         }
         for(Position pos:p2){
-            MoveStandard move=new MoveStandard(piece,pos,this.getBoard());
+            MoveAttempt move=new MoveAttempt(piece,pos,this.getBoard());
             if(this.isValid(move)){
                 made=move;
                 move.execute();
@@ -165,7 +148,7 @@ public class AI extends Player {
             }
         }
         for(Position pos:p2){
-            MoveStandard move=new MoveStandard(piece,pos,this.getBoard());
+            MoveAttempt move=new MoveAttempt(piece,pos,this.getBoard());
             if(this.isValid(move)){
                 move.execute();
                 made=move;

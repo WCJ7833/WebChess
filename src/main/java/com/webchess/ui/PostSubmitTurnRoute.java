@@ -93,7 +93,6 @@ public class PostSubmitTurnRoute implements Route {
             gameCenter.getReplayStorage().addTurn(attempt);
             Boolean isRegularMove = Math.abs((attempt.getStart().getRow()-attempt.getEnd().getRow()))==1;
             Piece piece = boardView.getPiece(boardView.getLastMove().getEnd().getRow(),boardView.getLastMove().getEnd().getCell());
-            if (!boardView.jumpy(piece) || isRegularMove) {
                 if(redPlayer.isTurn()){
                     whitePlayer.getBoard().getRules().checkStuck();
                 }
@@ -119,7 +118,6 @@ public class PostSubmitTurnRoute implements Route {
                     if (!ai.lost()) {
                         player.getBoard().getRules().checkStuck();
                     }
-                    ai.getBoard().setUpJumps();
                     activeColor = "RED";
                     httpSession.attribute(WHITE_PLAYER, ai);
                     httpSession.attribute(RED_PLAYER, redPlayer);
@@ -133,16 +131,7 @@ public class PostSubmitTurnRoute implements Route {
                     httpSession.attribute(BOARD, board);
                     return gson.toJson(new Message("You have finished your turn.", Message.TYPE.info));
                 }
-            }
-            else {
-                board.setForce(piece);
-                player.setMademoveAttempt(false);
-                httpSession.attribute(WHITE_PLAYER, whitePlayer);
-                httpSession.attribute(RED_PLAYER, redPlayer);
-                httpSession.attribute(ACTIVE_COLOR, activeColor);
-                httpSession.attribute(BOARD, board);
-                return gson.toJson(new Message("You can still jump with that piece.", Message.TYPE.info));
-            }
+
         } else {
             response.redirect(WebServer.HOME_URL);
             halt();

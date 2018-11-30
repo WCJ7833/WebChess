@@ -34,27 +34,16 @@ public class MoveJump extends Move{
         super.move(boyo);
         BoardView boardView = super.delete(other);
         super.setBoard(boardView);
-        super.king(super.getStart(),super.getEnd());
-        if(!allowExtraMove()) {
-            boyo.setForceJump(false);
-            super.setupForce(null);
-        } else {
-            boyo.setForceJump(true);
-            super.setupForce(boyo);
-            super.clearAttempt();
-        }
+        //if(!allowExtraMove()) {
+        //    boyo.setForceJump(false);
+        //    super.setupForce(null);
+        //} else {
+        //    boyo.setForceJump(true);
+        //    super.setupForce(boyo);
+        //    super.clearAttempt();
+        //}
     }
 
-    /**
-     * This method is used to determine whether or not the user can keep moving (the piece they selected
-     * can still go)
-     * @return true if the piece the user moved can make another jump, else, false
-     */
-    @Override//CALL THIS AFTER EXECUTE
-    public boolean allowExtraMove() {
-        Piece boyo=super.getAt(super.getEnd().getRow(),super.getEnd().getCell());
-        return super.jumper(boyo);
-    }
 
     /***
      * This method overrides the default equals method for MoveJump objects

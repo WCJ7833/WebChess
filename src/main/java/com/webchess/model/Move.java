@@ -67,12 +67,6 @@ public abstract class Move{
     }
 
     /**
-     * This is an abstract method to be implemented by subclasses
-     * @return true if the player can keep going (more jumps allowed)
-     */
-    public abstract boolean allowExtraMove();
-
-    /**
      * This is an abstract method to be implemented by subclasses, which executes their logic
      */
     public abstract void execute();
@@ -85,15 +79,6 @@ public abstract class Move{
      */
     public Piece getAt(int row, int col){
         return view.getPiece(row, col);
-    }
-
-    /**
-     * This method returns whether or not a given piece can make a jump
-     * @param z is a piece
-     * @return true if z can jump, else, false
-     */
-    public boolean jumper(Piece z){
-        return view.jumpy(z);
     }
 
     /**
@@ -126,17 +111,6 @@ public abstract class Move{
 
 
     /**
-     * This method is used to king the piece that moved into p, if needed
-     * @param start is the position from which the piece moved
-     * @param end is the position into which the piece moved
-     */
-    public void king(Position start,Position end){
-        if(end.getRow()==0){
-            view.doKing(start,end);
-        }
-    }
-
-    /**
      * This method sets up and returns the reversed version of the move
      * @param moveAttempt is the move you want the reversed version of
      * @param board is the board the reversed move is for
@@ -152,13 +126,6 @@ public abstract class Move{
         return reverse;
     }
 
-    /**
-     * This method is used to set the specified piece as the forced jumper
-     * @param p is the piece that is forced to jump
-     */
-    public void setupForce(Piece p){
-        view.setForce(p);
-    }
 
     /**
      * This method is used to clear the player's move attempt

@@ -180,16 +180,7 @@ public class BoardView implements Iterable<Row>{
      * @return true if the Move is allowed; otherwise, false
      */
     public boolean allowed(Move tryDo){
-        return (Boolean)rules.isValid(tryDo).get(0);
-    }
-
-    /**
-     * This method determines if a given piece can jump
-     * @param p is the piece to check
-     * @return true if this piece can jump, else, return false
-     */
-    public boolean jumpy(Piece p){
-        return rules.canJump(p);
+        return (Boolean)rules.isMoveValid(tryDo).get(0);
     }
 
     /**
@@ -245,17 +236,9 @@ public class BoardView implements Iterable<Row>{
      * This is a toggle for the turn
      */
     public void toggleisTurn(){
-        if(rules.getForcedJumper()==null) {
-            player.toggleTurn();
-            opponent.toggleTurn();
-            for (Piece p : player.getPieces()) {
-                p.setForceJump(false);
-            }
-            rules.clearForce();
-        }
-        else{
-            return;
-        }
+        player.toggleTurn();
+        opponent.toggleTurn();
+
     }
 
     /**
@@ -300,19 +283,6 @@ public class BoardView implements Iterable<Row>{
         return rows[row].getSpace(col).getPiece();
     }
 
-    public void doKing(Position start, Position end){
-
-        Piece thisKing=rows[end.getRow()].getSpace(end.getCell()).getPiece();
-        if (thisKing.getType() == Piece.TYPE.SINGLE) {
-            thisKing.makeKing();
-        }
-        Piece otherKing = opponent.getBoard().getPiece(start.reverse().getRow(), start.reverse().getCell());
-        if (otherKing.getType() == Piece.TYPE.SINGLE) {
-
-
-            otherKing.makeKing();
-        }
-    }
 
     /**
      * This method is used to update the appearance of the board to match
@@ -320,139 +290,10 @@ public class BoardView implements Iterable<Row>{
      * @param move is the opponent's move
      */
     public void takeMove(Move move){
-        rules.setUpJumpers();
         Moves.add(move);
         move.execute();
-        rules.setUpJumpers();
     }
 
-    /**
-     * This method sets up the board for a testing environment
-     */
-    public void setForTest(){
-        Piece red=rows[5].getSpace(4).getPiece();
-        Piece white=rows[2].getSpace(7).getPiece();
-        movePiece(red,5,4,4,5);
-        movePiece(white,2,7,3,6);
-        if(opponent.getBoard()!=null) {
-            opponent.getBoard().setForTestOpp();
-        }
-        rules.setUpJumpers();
-    }
-
-    /**
-     * This method sets up the board of the opponent for a testing environment
-     */
-    public void setForTestOpp(){
-        Piece red=rows[2].getSpace(3).getPiece();
-        Piece white=rows[5].getSpace(0).getPiece();
-        movePiece(red,2,3,3,2);
-        movePiece(white,5,0,4,1);
-        rules.setUpJumpers();
-    }
-
-    /**
-     * This method sets up the board for a multijump test
-     */
-    public void setForTestMulti(){
-        Piece red=rows[2].getSpace(3).getPiece();
-        Piece white=rows[5].getSpace(0).getPiece();
-        movePiece(red,2,3,3,2);
-        movePiece(white,5,0,4,1);
-        killPiece(rows[0].getSpace(5).getPiece());
-        rules.setUpJumpers();
-        opponent.getBoard().setForTestOppMulti();
-    }
-
-    /**
-     * This method sets up the board of the opponent for a multijump test
-     */
-    public void setForTestOppMulti(){
-        Piece red=rows[5].getSpace(4).getPiece();
-        Piece white=rows[2].getSpace(7).getPiece();
-        movePiece(red,5,4,4,5);
-        movePiece(white,2,7,3,6);
-        killPiece(rows[7].getSpace(2).getPiece());
-        rules.setUpJumpers();
-    }
-
-    /**
-     * This method sets up the board for a testing environment
-     */
-    public void setForTestKing(Position ks,Position ke,Position ts,Position te){
-        MoveStandard move2=new MoveStandard(ts,te,this);
-        move2.execute();
-        MoveStandard move1=new MoveStandard(ks,ke,this);
-        move1.execute();
-        rows[ke.getRow()].getSpace(ke.getCell()).getPiece().makeKing();
-        rules.setUpJumpers();
-    }
-
-    /**
-     * This sets up the player's board so that an AI will move a king
-     */
-    public void setAIKing(){
-        for(Row r:rows){
-            for (Space s : r.getSpaces()) {
-                if(s.getPiece()!=null){
-                    if(s.getPiece().getOwner().equals(player)){
-                        if(r.getIndex()!=5&&s.getCellIdx()!=0){
-                            getPieces().remove(s.getPiece());
-                            s.clear();
-                        }
-                    }
-                    else{
-                        if(r.getIndex()!=2&&s.getCellIdx()!=7){
-                            opponent.getPieces().remove(s.getPiece());
-                            s.clear();
-                        }
-                    }
-                }
-            }
-        }
-        opponent.getBoard().opponentSetAIKing();
-        movePiece(getPiece(2,7),2,7,7,0);
-        getPiece(7,0).makeKing();
-    }
-
-    /**
-     * This sets up the AI's board so that it can move a king
-     */
-    public void opponentSetAIKing(){
-        for(Row r:rows){
-            for (Space s : r.getSpaces()) {
-                if(s.getPiece()!=null){
-                    if(s.getPiece().getOwner().equals(player)){
-                        if(r.getIndex()!=5&&s.getCellIdx()!=0){
-                            getPieces().remove(s.getPiece());
-                            s.clear();
-                        }
-                    }
-                    else{
-                        if(r.getIndex()!=2&&s.getCellIdx()!=7){
-                            opponent.getPieces().remove(s.getPiece());
-                            s.clear();
-                        }
-                    }
-                }
-            }
-        }
-        movePiece(getPiece(5,0),5,0,0,7);
-        getPiece(0,7).makeKing();
-    }
-
-    /**
-     * This method sets a piece to be a forced jumper
-     * @param p is the piece toset as a jumper
-     */
-    public void setForce(Piece p){
-        rules.setForceJump(p);
-    }
-
-    /**
-     * This is a getter for the rules
-     * @return rules
-     */
 
     /**
      * This is a getter for rules
@@ -477,30 +318,6 @@ public class BoardView implements Iterable<Row>{
     }
 
     /**
-     * This method sets up the jumpers for this player
-     */
-    public void setUpJumps(){
-        rules.setUpJumpers();
-    }
-
-    /**
-     * This method gets the forced jumper for the player
-     * @return the piece that is the forced jumper
-     */
-    public Piece getForced(){
-        return rules.getForcedJumper();
-    }
-
-    /**
-     * this method tells whether or not a piece can jump
-     * @param p is the piece to check whether or not it can make a jump
-     * @return true if the piece can jump, else, false
-     */
-    public boolean canJump(Piece p){
-        return rules.canJump(p);
-    }
-
-    /**
      * This method tells whether or not a piece can make a standard move
      * @param p is the piece to check
      * @return true iff p can make a standard move, else, false
@@ -514,8 +331,8 @@ public class BoardView implements Iterable<Row>{
      * @param move is the move to check validity of
      * @return true iff move is valid; else, false
      */
-    public List<Object> isValid(Move move){
-        return rules.isValid(move);
+    public List<Object> isAttemptValid(Move move){
+        return rules.isMoveValid(move);
     }
 
     /**

@@ -90,8 +90,6 @@ public class PostBackupMoveRoute implements Route{
                     Piece piece2 = board2.getLastRemovedPiece();
                     opponent.addPiece(piece2);
                     board2.addPiece(piece2);
-                    board1.setUpJumps();
-                    board2.setUpJumps();
                 }
 
                 MoveAttempt backupMove2 = backupMove1.reverse(backupMove1,board2);

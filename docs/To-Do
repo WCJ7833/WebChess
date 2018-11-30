@@ -1,6 +1,5 @@
-Fix White Rook Art
-Make Red Piece Art
 Then Pawn Move
+Pawn only take other pieces via diagnol move (isMoveValid Rules)
 
 If time{
     Find online resourse to make actual piece shape

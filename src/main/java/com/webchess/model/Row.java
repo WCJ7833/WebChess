@@ -4,8 +4,7 @@ import java.util.Iterator;
 
 /**
  * This class represents a single row on the checkers board. It implements Iterable.
- * @author bjs2864@rit.edu
- * @author Sean Dunn smd6336@rit.edu
+ *
  */
 public class Row implements Iterable<Space>{
     /**
@@ -324,13 +323,47 @@ public class Row implements Iterable<Space>{
         String string = "";
         for (Space space: this.spaces){
             if (space.getPiece() == null){
-                string += " ";
+                string += "    ";
             }
             else if (space.getPiece().getColor() == Piece.COLOR.RED){
-                string += "R";
+                if (space.getPiece().getType() == Piece.TYPE.KING){
+                    string += " BK ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.QUEEN){
+                    string += " BQ ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.BISHOP){
+                    string += " BB ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.ROOK){
+                    string += " BR ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.KNIGHT){
+                    string += " BN ";
+                }
+                else{
+                    string += " BP ";
+                }
             }
             else{
-                string += "W";
+                if (space.getPiece().getType() == Piece.TYPE.KING){
+                    string += " WK ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.QUEEN){
+                    string += " WQ ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.BISHOP){
+                    string += " WB ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.ROOK){
+                    string += " WR ";
+                }
+                else if (space.getPiece().getType() == Piece.TYPE.KNIGHT){
+                    string += " WN ";
+                }
+                else{
+                    string += " WP ";
+                }
             }
         }
         return string;

@@ -240,31 +240,6 @@ public class Player {
     }
 
     /**
-     * This method is used to set up the player's jumping pieces
-     */
-    public void setJumps(){
-        board.setUpJumps();
-    }
-
-    /**
-     * This method is a getter for the forced jumper of the player in a
-     * multijump
-     * @return the forced jumping piece
-     */
-    public Piece getForced(){
-        return board.getForced();
-    }
-
-    /**
-     * This method is used to determine if the given piece can jump
-     * @param p is the piece to check for
-     * @return true iff p can make a MoveJump, else, false
-     */
-    public boolean canJump(Piece p){
-        return board.canJump(p);
-    }
-
-    /**
      * This method is used to determine if a piece can make a standard move
      * @param p is the piece to check
      * @return true iff p can make a standard move, else, false

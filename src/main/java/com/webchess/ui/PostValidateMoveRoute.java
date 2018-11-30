@@ -82,13 +82,12 @@ public class PostValidateMoveRoute implements Route{
             httpSession.attribute(ACTIVE_COLOR,active);
             BoardView board1 = player.getBoard();
             BoardView board2 = opponent.getBoard();
-            board1.setUpJumps();
-            board2.setUpJumps();
+
             String UncheckedMoveStr = request.body();
             MoveAttempt moveAttempt = gson.fromJson(UncheckedMoveStr, MoveAttempt.class);
             MoveAttempt moveAttempt1 = new MoveAttempt(moveAttempt.getStart(),moveAttempt.getEnd(),board1);
             MoveAttempt moveAttempt2 = moveAttempt1.reverse(moveAttempt1,board2);
-            List<Object> result=board1.isValid(moveAttempt1);
+            List<Object> result=board1.isAttemptValid(moveAttempt1);
             if (board1.allowed(moveAttempt1)&&!player.alreadyMademoveAttempt()){
                 moveAttempt2.setReverse();
                 board1.takeMove(moveAttempt1);

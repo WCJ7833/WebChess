@@ -19,14 +19,6 @@ public class MoveAttempt extends Move {
         super.setBoard(b);
         isReverse = false;
     }
-    /**
-     * this is the implementation of the abstract method allowExtraMove() from the superclass Move
-     * @return false
-     */
-    @Override
-    public boolean allowExtraMove() {
-        return false;
-    }
 
     /**
      * This is the implementation of the abstract method execute() from the superclass Move
@@ -38,25 +30,19 @@ public class MoveAttempt extends Move {
 
         boolean allowed = super.getView().allowed(this);
         if (allowed || isReverse) {
+
             if(abs(super.getStart().getRow() - super.getEnd().getRow()) == 2 &&
                     abs(super.getStart().getRow() - super.getEnd().getRow()) == 2  && isReverse){
                 super.getAt(super.getStart().getRow(), super.getStart().getCell()).setReverseJump(true);
             }
             Piece yaBoi = super.getAt(super.getStart().getRow(), super.getStart().getCell());
-            if (super.jumper(yaBoi) || yaBoi.isReverseJump()) {
-                MoveJump doThis = new MoveJump(super.getStart(), super.getEnd(),super.getView());
-                doThis.execute();
-            } else {
-                MoveStandard doThis = new MoveStandard(super.getStart(), super.getEnd(),super.getView());
-                doThis.execute();
-            }
+            super.move(yaBoi);
             if(isReverse){
                 if(super.getAt(super.getEnd().getRow(), super.getEnd().getCell()) == null){
                     return;
                 }
                 super.getAt(super.getEnd().getRow(), super.getEnd().getCell()).setReverseJump(false);
             }
-            super.king(super.getStart(),super.getEnd());
         }
     }
 
