@@ -109,7 +109,7 @@ public class Space {
      * else, false
      */
     public boolean isValid(){
-        return piece == null;
+        return (piece == null);
         //return (color.equals(SPACECOLOR.BLACK)&&piece==null);
     }
 

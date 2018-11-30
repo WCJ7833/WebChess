@@ -50,11 +50,8 @@ public class Rules {
             Space into = rows[attempt.getEnd().getRow()].getSpace(attempt.getEnd().getCell());
             //Pawn can only take piece via diagonol move
 
-            if (into.getPiece() == null){
+            if (into.getPiece() == null || !into.getPiece().getOwner().equals(mover.getOwner())){
                 return finalValid(mover,into);
-            }
-            else if (into.getPiece().getOwner().equals(mover.getOwner())){
-                return finalTake(mover,into);
             }
             else{
                 ArrayList<Object>returnInfo=new ArrayList();
@@ -81,24 +78,27 @@ public class Rules {
         }
         else if(mover.getType().equals(Piece.TYPE.PAWN)) {
             ArrayList<Object> returnMessage = regularPawnMove(mover,into);
-            System.out.println(returnMessage.get(0));
             return returnMessage;
-
         }
         else if(mover.getType().equals(Piece.TYPE.KING)) {
-
+            ArrayList<Object> returnMessage = regularKingMove(mover,into);
+            return returnMessage;
         }
         else if(mover.getType().equals(Piece.TYPE.BISHOP)) {
-
+            ArrayList<Object> returnMessage = regularPawnMove(mover,into);
+            return returnMessage;
         }
         else if(mover.getType().equals(Piece.TYPE.ROOK)) {
-
+            ArrayList<Object> returnMessage = regularPawnMove(mover,into);
+            return returnMessage;
         }
         else if(mover.getType().equals(Piece.TYPE.QUEEN)) {
-
+            ArrayList<Object> returnMessage = regularPawnMove(mover,into);
+            return returnMessage;
         }
         else if(mover.getType().equals(Piece.TYPE.KNIGHT)) {
-
+            ArrayList<Object> returnMessage = regularPawnMove(mover,into);
+            return returnMessage;
         }
 
             //int dist1 = Math.abs(mover.getCol() - into.getCellIdx());
@@ -106,9 +106,9 @@ public class Rules {
             //if (dist1 == 1 && dist2 == 1) {
             //    boolean allow=rows[into.getRow()].getSpace(into.getCellIdx()).isValid();
             //    if(allow){
-                    ArrayList<Object> returns=new ArrayList<>();
-                    returns.add(false);
-                    returns.add("");
+            //        ArrayList<Object> returns=new ArrayList<>();
+            //        returns.add(false);
+            //        returns.add("");
                     //return returns;
            //     }
            //     else{
@@ -118,63 +118,39 @@ public class Rules {
            //         return returns;
           //      }
            // }
-
-        if(mover.getType().equals(Piece.TYPE.SINGLE)) {
-            //int dist1 = Math.abs(mover.getCol() - into.getCellIdx());
-            //int dist2 = mover.getRow() - into.getRow();
-            //if (dist1 == 1 && dist2 == 1) {
-            //    boolean allow=rows[into.getRow()].getSpace(into.getCellIdx()).isValid();
-            //    if(allow){
-            //        ArrayList<Object> objects = new ArrayList<>();
-            //        objects.add(allow);
-            //        objects.add("");
-            //        return objects;
-            //    }
-            //    else{
-                    ArrayList<Object> objects = new ArrayList<>();
-                    objects.add(false);
-                    objects.add("Cannot move into an occupied or white square.");
-                    return objects;
-            //    }
-            //}
-            //else{
-            //    ArrayList<Object> objects = new ArrayList<>();
-            //    objects.add(false);
-            //    objects.add("Single piece can only move into "+
-            //            "squares diagonal, in front, and adjacent.");
-            //    return objects;
-            //}
-        }
         else {
-                ArrayList<Object> objects = new ArrayList<>();
-                objects.add(false);
-                objects.add("King piece can only move into "+
-                        "squares diagonal, in front, and adjacent.");
-                return objects;
-
+            ArrayList<Object> objects = new ArrayList<>();
+            objects.add(false);
+            objects.add("King piece can only move into "+
+                    "squares diagonal, in front, and adjacent.");
+            return objects;
         }
     }
 
     public ArrayList<Object> regularPawnMove(Piece mover, Space into){
-        System.out.println(mover);
-        System.out.println(into.toString());
         if (mover.isFirstMove()){
-            int distanceTraveled = into.getRow() - mover.getRow();
+            int distanceTraveled = Math.abs(into.getRow() - mover.getRow());
             if (distanceTraveled == 2){
-                int columnChange = into.getCellIdx() - mover.getCol();
+                int columnChange = Math.abs(into.getCellIdx() - mover.getCol());
                 if (columnChange == 0){
-                    Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
-                    if (spaceBetween.isValid()){
-                        mover.setFirstMove(false);
-                        ArrayList<Object> returns=new ArrayList<>();
-                        returns.add(true);
-                        returns.add("");
-                        return returns;
+                    if (into.isValid()) {
+                        Space spaceBetween = board.getRows()[mover.getRow() - 1].getSpace(mover.getCol());
+                        if (spaceBetween.isValid()) {
+                            ArrayList<Object> returns = new ArrayList<>();
+                            returns.add(true);
+                            returns.add("");
+                            return returns;
+                        } else {
+                            ArrayList<Object> returns = new ArrayList<>();
+                            returns.add(false);
+                            returns.add("There is a piece between your start and end spaces");
+                            return returns;
+                        }
                     }
                     else{
-                        ArrayList<Object> returns=new ArrayList<>();
+                        ArrayList<Object> returns = new ArrayList<>();
                         returns.add(false);
-                        returns.add("There is a piece between your start and end spaces");
+                        returns.add("You can't take a piece via forward movement");
                         return returns;
                     }
                 }
@@ -186,11 +162,10 @@ public class Rules {
                 }
             }
             else if (distanceTraveled == 1){
-                int columnChange = into.getCellIdx() - mover.getCol();
+                int columnChange = Math.abs(into.getCellIdx() - mover.getCol());
                 if (columnChange == 0){
-                    Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
+                    Space spaceBetween = board.getRows()[mover.getRow()-1].getSpace(mover.getCol());
                     if (spaceBetween.isValid()){
-                        mover.setFirstMove(false);
                         ArrayList<Object> returns=new ArrayList<>();
                         returns.add(true);
                         returns.add("");
@@ -218,9 +193,9 @@ public class Rules {
             }
         }
         else{
-            int distanceTraveled = into.getRow() - mover.getRow();
+            int distanceTraveled = Math.abs(into.getRow() - mover.getRow());
             if (distanceTraveled == 1){
-                int columnChange = into.getCellIdx() - mover.getCol();
+                int columnChange = Math.abs(into.getCellIdx() - mover.getCol());
                 if (columnChange == 0){
                     Space spaceBetween = board.getRows()[mover.getRow()].getSpace(mover.getCol()+1);
                     if (spaceBetween.isValid()){
@@ -246,12 +221,95 @@ public class Rules {
             else{
                 ArrayList<Object> returns=new ArrayList<>();
                 returns.add(false);
-                returns.add("Your pawn move can only go forward 1 space");
+                returns.add("Your pawn can only go forward 1 space");
                 return returns;
             }
         }
     }
 
+    public ArrayList<Object> regularKingMove(Piece mover, Space into){
+        //Castling not availiable yet
+        if (!mover.isFirstMove()){
+            int rowChange = Math.abs(into.getRow() - mover.getRow());
+            int colChange = Math.abs(into.getCellIdx() - mover.getCol());
+            if (rowChange == 1){
+                if (colChange == 1 || colChange == 0){
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(true);
+                    returns.add("");
+                    return returns;
+                }
+                else{
+                    //king can only move 1 space in any direction
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(false);
+                    returns.add("A king can only move 1 space in any direction except castling");
+                    return returns;
+                }
+            }
+            else if (rowChange == 0){
+                if (colChange == 1){
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(true);
+                    returns.add("");
+                    return returns;
+                }
+                else{
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(false);
+                    returns.add("You didn't move the piece");
+                    return returns;
+                    //king need to move
+                }
+            }
+            else{
+                ArrayList<Object> returns=new ArrayList<>();
+                returns.add(false);
+                returns.add("A king can only move 1 space in any direction except castling");
+                return returns;
+            }
+        }
+        else{
+            int rowChange = Math.abs(into.getRow() - mover.getRow());
+            int colChange = Math.abs(into.getCellIdx() - mover.getCol());
+            if (rowChange == 1){
+                if (colChange == 1 || colChange == 0){
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(true);
+                    returns.add("");
+                    return returns;
+                }
+                else{
+                    //king can only move 1 space in any direction
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(false);
+                    returns.add("A king can only move 1 space in any direction except castling");
+                    return returns;
+                }
+            }
+            else if (rowChange == 0){
+                if (colChange == 1){
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(true);
+                    returns.add("");
+                    return returns;
+                }
+                else{
+                    ArrayList<Object> returns=new ArrayList<>();
+                    returns.add(false);
+                    returns.add("You didn't move the piece");
+                    return returns;
+                    //king need to move
+                }
+            }
+            else{
+                ArrayList<Object> returns=new ArrayList<>();
+                returns.add(false);
+                returns.add("A king can only move 1 space in any direction except castling");
+                return returns;
+            }
+        }
+    }
 
     public ArrayList<Object> finalTake(Piece mover, Space into) {
         if(mover==null||board.getPlayer().alreadyMademoveAttempt()){
