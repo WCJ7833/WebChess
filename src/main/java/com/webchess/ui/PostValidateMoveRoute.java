@@ -88,8 +88,6 @@ public class PostValidateMoveRoute implements Route{
             MoveAttempt moveAttempt1 = new MoveAttempt(moveAttempt.getStart(),moveAttempt.getEnd(),board1);
             MoveAttempt moveAttempt2 = moveAttempt1.reverse(moveAttempt1,board2);
             List<Object> result=board1.isAttemptValid(moveAttempt1);
-            System.out.println(player.alreadyMademoveAttempt());
-            System.out.println(moveAttempt1);
             if (board1.allowed(moveAttempt1)&&!player.alreadyMademoveAttempt()){
                 moveAttempt2.setReverse();
                 board1.takeMove(moveAttempt1);

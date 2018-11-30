@@ -206,6 +206,10 @@ public class BoardView implements Iterable<Row>{
      * @param endCol is the column the piece ends in
      */
     public void movePiece(Piece piece, int startRow, int startCol, int endRow, int endCol){
+        if (piece.isFirstMove()){
+            piece.setFirstMove(false);
+        }
+        killPiece(rows[endRow].getSpace(endCol).getPiece());
         piece.setRow(endRow);
         piece.setCol(endCol);
         this.getRows()[startRow].getSpace(startCol).clear();

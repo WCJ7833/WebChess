@@ -40,6 +40,7 @@ public class Rules {
      */
     public ArrayList<Object> isMoveValid(Move attempt) {
         Piece mover = rows[attempt.getStart().getRow()].getSpace(attempt.getStart().getCell()).getPiece();
+        System.out.println(mover.isFirstMove());
         if (mover == null){
             ArrayList<Object>returnInfo=new ArrayList();
             returnInfo.add(false);
@@ -178,6 +179,29 @@ public class Rules {
                         return returns;
                     }
                 }
+                else if(columnChange == 1){
+                    if (!into.isValid()){
+                        if (into.getPiece().getOwner().equals(this.board.getOpponent())){
+                            ArrayList<Object> returns = new ArrayList<>();
+                            returns.add(true);
+                            returns.add("");
+                            return returns;
+                        }
+                        else{
+                            ArrayList<Object> returns = new ArrayList<>();
+                            returns.add(false);
+                            returns.add("You can't take your own piece");
+                            return returns;
+                        }
+                    }
+                    else{
+                        ArrayList<Object> returns = new ArrayList<>();
+                        returns.add(false);
+                        returns.add("You can't do a diagonal move unless your taking an opponent's piece");
+                        return returns;
+                        //Only do this move while taking a piece
+                    }
+                }
                 else {
                     ArrayList<Object> returns=new ArrayList<>();
                     returns.add(false);
@@ -209,6 +233,29 @@ public class Rules {
                         returns.add(false);
                         returns.add("There is a piece in front of your pawn");
                         return returns;
+                    }
+                }
+                else if(columnChange == 1){
+                    if (!into.isValid()){
+                        if (into.getPiece().getOwner().equals(this.board.getOpponent())){
+                            ArrayList<Object> returns = new ArrayList<>();
+                            returns.add(true);
+                            returns.add("");
+                            return returns;
+                        }
+                        else{
+                            ArrayList<Object> returns = new ArrayList<>();
+                            returns.add(false);
+                            returns.add("You can't take your own piece");
+                            return returns;
+                        }
+                    }
+                    else{
+                        ArrayList<Object> returns = new ArrayList<>();
+                        returns.add(false);
+                        returns.add("You can't do a diagonal move unless your taking an opponent's piece");
+                        return returns;
+                        //Only do this move while taking a piece
                     }
                 }
                 else {
