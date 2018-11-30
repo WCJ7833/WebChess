@@ -1,13 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="44"
    height="44"
-   id="svg2">
+   id="svg2"
+   sodipodi:docname="red_bishop.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata48">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview46"
+     showgrid="false"
+     inkscape:zoom="12.181818"
+     inkscape:cx="22"
+     inkscape:cy="22.816284"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
   <defs
      id="defs4">
     <linearGradient
@@ -78,12 +118,8 @@
      transform="translate(293.42856,-456.07648)"
      id="layer1">
     <g
-       transform="translate(-1.0959925,-1.3623321)"
+       transform="translate(-1.0959925,2.5153029)"
        id="g3264">
-      <path
-         d="M -255.84411,479.44293 L -255.84411,487.19506 C -255.84411,491.56277 -262.33494,495.10757 -270.33257,495.10757 C -278.33019,495.10757 -284.82102,491.56277 -284.82102,487.19506 L -284.82102,479.44293 L -255.84411,479.44293 z"
-         id="path3254"
-         style="fill:url(#radialGradient3269);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.98981297;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1" />
       <path
          d="M -255.84411,471.68766 L -255.84411,479.43979 C -255.84411,483.8075 -262.33494,487.3523 -270.33257,487.3523 C -278.33019,487.3523 -284.82102,483.8075 -284.82102,479.43979 L -284.82102,471.68766 L -255.84411,471.68766 z"
          id="path3225"
@@ -95,4 +131,16 @@
          style="opacity:1;fill:#e52602;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.98981297;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
   </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:16.9937458px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.42484367"
+     x="15.032509"
+     y="25.839975"
+     id="text52"
+     transform="scale(1.1044837,0.90540042)"><tspan
+       sodipodi:role="line"
+       id="tspan50"
+       x="15.032509"
+       y="25.839975"
+       style="stroke-width:0.42484367">B</tspan></text>
 </svg>
